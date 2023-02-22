@@ -2,7 +2,10 @@ import express from "express"
 import { engine } from "express-handlebars"
 import db from "./services/db.js"
 
+import bodyParser from 'body-parser'
 const app = express()
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /*
   Det här gör att alla filer i mappen public skickas till webbläsaren om den ber om det.
@@ -23,21 +26,35 @@ app.get("/", (req, res) => {
 })
 
 app.get("/users", async (req, res) => {
-  const users = await db.getUsers() // Hämtar alla users ur databasen
+  const posts = await db.getUsers() // Hämtar alla users ur databasen
 
   //Säger att vyn users ska användas och man sickar med
   //ett objekt som har en egenskap, "users", som är en array med alla users.
   //Det objektet kan användas av mallen/templaten/vyn.
-  res.render("users", { users })
+  res.render("guestbook", { posts })
 })
 
-app.get("/posts", async (req, res) => {
-  const userId = req.query.userId
-  const posts = await db.getPostsByUserId(userId)
-  res.render("posts", { userId, posts })
+app.get("guestbook", async (req, res) => {
+  const name = req.query.name
+  const comment = await db.getPostsByUserId(name)
+  res.render("guestbook", { name, comment })
 })
+
+app.post("/add-post", async (req, res) => {
+  //res.render("guestbook", { name, comment })
+  console.log(req.body)
+
+  // Gör INSERT i DB här
+  db.insertIntoGuestbook(req.body.name, req.body.email, req.body.comment)
+
+  res.send("ok")
+  
+})
+
+
 
 const port = 3000
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`)
 })
+

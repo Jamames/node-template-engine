@@ -4,9 +4,20 @@ body {
 }
 
 footer {
-  background-color: lightgreen;
+  background-color: rgb(173, 173, 173);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40vh;
+}
+
+.namelist {
+  list-style-type: none;
+}
+
+ul>div {
+  background-color: rgb(173, 173, 173);;
+  padding: 10px;
+  width: 700px;
+  font-size: 20px;
 }

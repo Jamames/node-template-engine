@@ -12,11 +12,11 @@ Den här mallen förutsätter att man skickat in ett objekt som ser ut så här:
  }
 
  --}}
-<h1>Användare</h1>
-<ul class="people_list">
+<h1>Posts</h1>
+<ul class="namelist">
   {{!-- Här är en loop som loopar över arrayen users som skickats till den här templaten/mallen. --}}
-  {{#each users}}
+  {{#each posts}}
   {{!-- inne i loopen använder man "this" för att komma åt det aktuella elementet i arrayen --}}
-    <li>{{this.username}} <a href="/posts?userId={{this.id}}">Posts</a> </li>
+    <div><h2>{{this.name}}</h2> <li>{{this.email}}</li><li>{{this.comment}}</li><li>{{this.time}}</li></div><br>
   {{/each}}
 </ul>

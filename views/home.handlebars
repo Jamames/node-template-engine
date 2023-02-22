@@ -1,3 +1,16 @@
 {{!-- Nedan definieras vad som ska visas/renderas istället för  {{{body}}} i main.handlebars  --}}
 <h1>Example App: Home</h1>
+ <h1>Gästbok</h1>
+    <form action="/add-post" method="post">
+        Name:<br />
+        <input type="text" name="name" required />
+        <br />
+        Email:<br />
+        <input type="email" name="email" required />
+        <br />
+        Comment:<br />
+        <input type="text" name="comment" required />
+        <br />
+        <input type="submit" value="Submit" />
+    </form>
 <a href="users">Visa alla användare</a>
